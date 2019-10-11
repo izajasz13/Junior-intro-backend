@@ -1,4 +1,4 @@
-const { Task, validateTask } = require('../models/task')
+const { Task, validateTask } = require('../models/Task')
 
 module.exports = {
     getTaskById: async (req, res) => {
