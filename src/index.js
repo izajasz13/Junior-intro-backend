@@ -1,3 +1,3 @@
-const connectToDB = require('../config/connectDB');
+const { connectToDB } = require('../config/connectDB');
 
-connectToDB.connectToDB();
+connectToDB();
