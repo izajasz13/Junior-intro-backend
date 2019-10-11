@@ -25,7 +25,8 @@ const userSchema = new mongoose.Schema({
         maxlength: 255
     },
     currentTask: {
-        type: { type: mongoose.Schema.Types.ObjectId, ref: 'Task' },
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Task',
         required: true
     },
     coins: {
