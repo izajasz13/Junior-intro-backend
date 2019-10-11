@@ -19,7 +19,7 @@ const taskSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    question: [],
+    questions: [],
     answers: []
 });
 
