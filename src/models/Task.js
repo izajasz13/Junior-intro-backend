@@ -32,7 +32,7 @@ function validateTask(task){
         coins: Joi.number().required(),
         exp: Joi.number().required()
     }
-    return Joi.validate(task, schema)
+    return Joi.validate(task, schema);
 };
 
 exports.taskSchema = taskSchema;
