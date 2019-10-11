@@ -3,7 +3,7 @@ const router = express.Router();
 const usersController = require('../controllers/users');
 
 router
-    .route('/:id')
+    .route('/user/:id')
     .get(usersController.getUserById);
 
 router
