@@ -5,7 +5,7 @@ const route =  require('./routes/users');
 connectToDB();
 
 app.use(express.json());
-app.use('/login', route);
+app.use('/', route);
 
 const port = process.env.PORT || 3000;
 console.log(port);

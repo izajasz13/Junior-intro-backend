@@ -7,7 +7,7 @@ router
     .get(usersController.getUserById);
 
 router
-    .route('/')
+    .route('/login')
     .post(usersController.loginUser);
 
 module.exports = router;
