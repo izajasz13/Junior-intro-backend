@@ -3,7 +3,7 @@ const router = express.Router();
 const taskController = require('../controllers/task');
 
 router
-    .route('/task')
+    .route('/task/:id')
     .get(taskController.getTaskById);
 
 module.exports = router;

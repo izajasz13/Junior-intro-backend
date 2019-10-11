@@ -7,11 +7,15 @@ module.exports = {
             if(!task) return res.status(404).send('No task with given ID');
             const obj = {
                 description: task.description,
-                price: {
+                prize: {
                     exp: task.exp,
                     coins: task.coins
                 },
-                questions: task.questions
+                questions: task.questions,
+                answers: {
+                    number: task.answers.number,
+                    content: task.answers.content
+                }
             }
             res.send(JSON.stringify(obj));
         }
@@ -19,5 +23,4 @@ module.exports = {
             res.status(500).send('Server side error');
         }
     }
-
 }
