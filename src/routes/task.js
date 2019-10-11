@@ -11,7 +11,7 @@ router
     .post(taskController.createTask);
 
 router
-    .router('/task/update')
+    .route('/task/update')
     .post(taskController.updateTask);
 
 module.exports = router;
