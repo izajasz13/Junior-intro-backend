@@ -54,7 +54,14 @@ module.exports = {
             let user = await User.findOne({ username: req.body.username });
             if (!user || (user.password != req.body.password)) return res.status(400).send('Invalid username or password.');
 
-            res.send(user._id);
+            res.send({ 
+               coins: user.coins,
+               experience: user.experience,
+               _id: user._id,
+               username: user.username,
+               name: user.name,
+               currentTask: user.currentTask
+            });
         } catch (error) {
             res.status(500).send('An error occured.');
         }
