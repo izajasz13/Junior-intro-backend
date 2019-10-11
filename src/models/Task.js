@@ -40,4 +40,3 @@ function validateTask(task){
 exports.taskSchema = taskSchema;
 exports.validateTask = validateTask;
 exports.Task = Task;
-
