@@ -9,15 +9,14 @@ const taskNamesSchema = new Schema({
     },
 
     taskId: {
-        type: String,
+        type: Schema.Types.ObjectId,
         required: true,
         unique: true
     },
 
     section: {
         type: Number,
-        required: true,
-        unique: true
+        required: true
     }
 });
 
