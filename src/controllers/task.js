@@ -63,7 +63,7 @@ module.exports = {
                 {new: true}
             );
             if (!task) return res.status(404).send('Task not found');
-            res.send(user);
+            res.send("Updated succesfully")
         }
         catch(error){
             res.status(500).send('Server side error');
