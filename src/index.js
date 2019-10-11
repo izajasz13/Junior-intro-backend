@@ -2,8 +2,10 @@ const  express = require('express');
 const { connectToDB } = require('../config/connectDB');
 const app = express();
 const route =  require('./routes/users');
+const cors = require('cors');
 connectToDB();
 
+app.use(cors());
 app.use(express.json());
 
 app.use('/', route);
