@@ -1,4 +1,4 @@
-const { User, validate } = require('../models/user')
+const { User, validate, validateLogin } = require('../models/user')
 
 module.exports = {
 
@@ -21,7 +21,7 @@ module.exports = {
         } catch (error) {
             res.status(500).send('An error occured.');
         }
-  },
+    },
 
     updateUser: async (req, res) => {
         try {
@@ -44,6 +44,19 @@ module.exports = {
         } catch (error) {
             res.status(500).send('An error occured.');
         }
-     },
+    },
 
+    loginUser: async (req, res) => {
+        try {
+            const { error } = validateLogin(req.body);
+            if(error) return res.status(400).send(error.details[0].message);
+
+            let user = await User.findOne({ username: req.body.username });
+            if (!user || (user.password != req.body.password)) return res.status(400).send('Invalid email or password.');
+
+            res.send(true);
+        } catch (error) {
+            res.status(500).send('An error occured.');
+        }
+    }
 }
