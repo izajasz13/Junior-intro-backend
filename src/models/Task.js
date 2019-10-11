@@ -21,6 +21,7 @@ const taskSchema = new mongoose.Schema({
     },
     questions: [String],
     answers: [{number: Number, content: String, isCorrect: Boolean}]
+
 });
 
 const Task = mongoose.model('Task', taskSchema);
@@ -33,8 +34,10 @@ function validateTask(task){
         exp: Joi.number().required()
     }
     return Joi.validate(task, schema)
+
 };
 
 exports.taskSchema = taskSchema;
 exports.validateTask = validateTask;
 exports.Task = Task;
+
