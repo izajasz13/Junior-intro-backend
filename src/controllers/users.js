@@ -52,7 +52,7 @@ module.exports = {
             if(error) return res.status(400).send(error.details[0].message);
 
             let user = await User.findOne({ username: req.body.username });
-            if (!user || (user.password != req.body.password)) return res.status(400).send('Invalid email or password.');
+            if (!user || (user.password != req.body.password)) return res.status(400).send('Invalid username or password.');
 
             res.send(true);
         } catch (error) {
