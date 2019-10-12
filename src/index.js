@@ -8,6 +8,7 @@ app.use(express.json());
 
 app.use('/', route);
 app.use('/section', require('./routes/section'));
+app.use('/knowledge', require('./routes/knowledge'));
 
 const port = process.env.PORT || 3000;
 console.log("Listening on port: " + port);

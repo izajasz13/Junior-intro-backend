@@ -15,7 +15,7 @@ const taskNamesSchema = new Schema({
 
     taskId: {
         type: Schema.Types.ObjectId,
-        ref: 'task',
+        ref: 'Task',
         required: true,
         unique: true
     },
