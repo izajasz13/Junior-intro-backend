@@ -4,8 +4,7 @@ module.exports = {
     getTaskById: async (req, res) => {
         try{
             const id = req.params.id;
-            const task = await Task.findById(id)
-            console.log(id);
+            const task = await Task.findById(id);
             if(!task) return res.status(404).send('No task with given ID');
             const obj = {
                 description: task.description,
@@ -22,8 +21,7 @@ module.exports = {
             res.send(JSON.stringify(obj));
         }
         catch(error){
-            console.log(error);
-            res.status(500).send('Server side error');
+            res.status(500).send(error);
         }
     },
 
@@ -45,14 +43,13 @@ module.exports = {
             res.send("Succesfully added");
         }
         catch(error){
-            console.log(error);
-            res.status(500).send('Server side error');
+            res.status(500).send(error);
         }
     },
 
     updateTask: async (req, res) => {
         try{
-            const data = JSON.parse(req.body);
+            const data = req.body;
             const {error} = validateTask(data);
             if(error) return res.status(400).send(error.details[0].message);
             const task = await Task.findByIdAndUpdate(data.id,
