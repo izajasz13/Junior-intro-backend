@@ -13,7 +13,7 @@ const taskSchema = new mongoose.Schema({
     },
     nextTask: {
         type: String,
-        default: null,
+        default: '',
     },
     coins: {
         type: Number,

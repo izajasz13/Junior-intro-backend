@@ -31,11 +31,11 @@ module.exports = {
             const data = req.body;
             const {error} = validateTask(data);
             if(error) return res.status(400).send(error.details[0].message);
-            const taskToUpdate = await Task.findOne({nextTask: null});
+            const taskToUpdate = await Task.findOne({nextTask: ''});
             const task = new Task({
                 title: data.title,
                 description: data.description,
-                nextTask: null,
+                nextTask: '',
                 coins: data.coins,
                 exp: data.exp,
                 questions: data.questions,
