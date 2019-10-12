@@ -10,14 +10,12 @@ const taskNamesSchema = new Schema({
     title: {
         type: String,
         required: true,
-        unique: true
     },
 
     taskId: {
         type: Schema.Types.ObjectId,
         ref: 'Task',
         required: true,
-        unique: true
     },
 
     section: {
@@ -26,4 +24,4 @@ const taskNamesSchema = new Schema({
     }
 });
 
-exports.TaskName = mongoose.model('taskName', taskNamesSchema);
+exports.TaskName = mongoose.model('taskName', taskNamesSchema, 'taskNames');
