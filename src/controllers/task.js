@@ -41,16 +41,13 @@ module.exports = {
                 questions: data.questions,
                 answers: data.answers
             })
-            const isCreated = await task.save();
+            await task.save();
             if(taskToUpdate){
                 const taskCreated = await Task.findOne({title: data.title});
                 const id = taskCreated._id;
                 const filter = ({_id: taskToUpdate._id});
                 await Task.updateOne(filter, {nextTask: id})
                 if (!taskToUpdate) return res.status(404).send('Task to update not found');
-            }
-            else{
-                if (!isCreated) return res.status(404).send('Task to update not found');
             }
 
             res.send("Succesfully added");
