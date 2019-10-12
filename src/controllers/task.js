@@ -1,9 +1,11 @@
-const { Task, validateTask } = require('../models/task')
+const { Task, validateTask } = require('../models/Task')
 
 module.exports = {
     getTaskById: async (req, res) => {
         try{
-            const task = await Task.findById(req.params.id)
+            const id = req.params.id;
+            const task = await Task.findById(id)
+            console.log(id);
             if(!task) return res.status(404).send('No task with given ID');
             const obj = {
                 description: task.description,
@@ -20,13 +22,14 @@ module.exports = {
             res.send(JSON.stringify(obj));
         }
         catch(error){
+            console.log(error);
             res.status(500).send('Server side error');
         }
     },
 
     createTask: async (req, res) => {
         try{
-            const data = JSON.parse(req.body);
+            const data = req.body;
             const {error} = validateTask(data);
             if(error) return res.status(400).send(error.details[0].message);
 
@@ -42,6 +45,7 @@ module.exports = {
             res.send("Succesfully added");
         }
         catch(error){
+            console.log(error);
             res.status(500).send('Server side error');
         }
     },

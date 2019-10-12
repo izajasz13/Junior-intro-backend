@@ -24,14 +24,16 @@ const taskSchema = new mongoose.Schema({
 
 });
 
-const Task = mongoose.model('Task', taskSchema);
+const Task = mongoose.model('Task', taskSchema, 'Task');
 
 function validateTask(task){
     const schema = {
         title: Joi.string().min(4).required(),
         description: Joi.string().required(),
         coins: Joi.number().required(),
-        exp: Joi.number().required()
+        exp: Joi.number().required(),
+        questions: Joi.array().required(),
+        answers: Joi.array()
     }
     return Joi.validate(task, schema)
 
