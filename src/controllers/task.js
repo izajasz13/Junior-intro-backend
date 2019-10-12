@@ -48,8 +48,14 @@ module.exports = {
                 questions: data.questions,
                 answers: data.answers
             });
-
+            const taskName = new TaskName({
+                number: data.number,
+                title: task.title,
+                taskId: task._id,
+                section: data.section
+            });
             await task.save();
+            await taskName.save();
             if(taskToUpdate){
                 const taskCreated = await Task.findOne({title: data.title});
                 const id = taskCreated._id;
