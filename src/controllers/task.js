@@ -1,4 +1,4 @@
-const { Task, validateTask } = require('../models/task')
+const { Task, validateTask } = require('../models/Task')
 const { User } = require('../models/user')
 
 module.exports = {
