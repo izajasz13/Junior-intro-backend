@@ -7,6 +7,12 @@ const taskSchema = new mongoose.Schema({
         required: true,
         min: 4
     },
+
+    number: {
+        type: Number,
+        required:true
+    },
+
     description: {
         type: String,
         required: true
@@ -33,7 +39,8 @@ function validateTask(task){
         coins: Joi.number().required(),
         exp: Joi.number().required(),
         questions: Joi.array().required(),
-        answers: Joi.array()
+        answers: Joi.array(),
+        number: Joi.required()
     }
     return Joi.validate(task, schema)
 
