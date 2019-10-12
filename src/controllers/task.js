@@ -14,10 +14,7 @@ module.exports = {
                     coins: task.coins
                 },
                 questions: task.questions,
-                answers: {
-                    number: task.answers.number,
-                    content: task.answers.content
-                }
+                answers: task.answers
             }
             res.send(obj);
         }
