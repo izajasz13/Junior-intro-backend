@@ -7,7 +7,7 @@ const taskNamesSchema = new Schema({
         require: true
     },
 
-    name: {
+    title: {
         type: String,
         required: true,
         unique: true

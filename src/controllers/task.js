@@ -28,7 +28,16 @@ module.exports = {
     createTask: async (req, res) => {
         try {
             const data = req.body;
-            const {error} = validateTask(data);
+            const data1 = {
+                title: data.title,
+                description: data.description,
+                nextTask: '',
+                coins: data.coins,
+                exp: data.exp,
+                questions: data.questions,
+                answers: data.answers
+            };
+            const {error} = validateTask(data1);
             if(error) return res.status(400).send(error.details[0].message);
             const taskToUpdate = await Task.findOne({nextTask: ''});
             const task = new Task({
@@ -42,7 +51,7 @@ module.exports = {
             });
 
             const taskName = new TaskName({
-                numer: data.sectionNumber,
+                number: data.number,
                 title: task.title,
                 taskId: task._id,
                 section: data.section
