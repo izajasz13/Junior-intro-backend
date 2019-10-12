@@ -24,7 +24,7 @@ const taskSchema = new mongoose.Schema({
         required: true
     },
     questions: [String],
-    answers: [{number: Number, content: String, isCorrect: Boolean}]
+    answers: [Number]
 
 });
 
