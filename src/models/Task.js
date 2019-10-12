@@ -29,9 +29,14 @@ const taskSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    questions: [String],
+    questions: [{
+        question: String,
+        answers: [{
+            number: Number,
+            content: String
+        }]
+    }],
     answers: [Number]
-
 });
 
 const Task = mongoose.model('Task', taskSchema, 'Task');
