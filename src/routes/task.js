@@ -14,4 +14,8 @@ router
     .route('/task/update')
     .post(taskController.updateTask);
 
+router
+    .route('/task/answer')
+    .post(taskController.checkAnswers);
+
 module.exports = router;

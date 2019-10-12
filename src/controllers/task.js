@@ -1,5 +1,6 @@
 const { TaskName } = require('../models/taskNames');
 const { Task, validateTask } = require('../models/task')
+
 const { User } = require('../models/user')
 
 module.exports = {
@@ -15,10 +16,7 @@ module.exports = {
                     coins: task.coins
                 },
                 questions: task.questions,
-                answers: {
-                    number: task.answers.number,
-                    content: task.answers.content
-                }
+                answers: task.answers
             }
             res.send(obj);
         }
@@ -32,11 +30,11 @@ module.exports = {
             const data = req.body;
             const {error} = validateTask(data);
             if(error) return res.status(400).send(error.details[0].message);
-            const taskToUpdate = await Task.findOne({nextTask: null});
+            const taskToUpdate = await Task.findOne({nextTask: ''});
             const task = new Task({
                 title: data.title,
                 description: data.description,
-                nextTask: null,
+                nextTask: '',
                 coins: data.coins,
                 exp: data.exp,
                 questions: data.questions,
@@ -93,11 +91,12 @@ module.exports = {
     checkAnswers: async (req, res) => {
         try{
             const data = req.body;
-            const task = Task.findById(data.id);
+            console.log(data.id);
+            const task = await Task.findById(data.id);
             if(!task) return res.status(404).send('No task with given ID');
 
             const points = task.answers.map((ele, i) => data.answers[i] === ele ? 1 : 0);  
-            const user = User.findById(data.user);
+            const user = await User.findById(data.user);
             const coins = user.coins + (points.reduce((ele, acc) => acc + ele) * task.coins);
             const experience = user.experience + task.exp;
             
@@ -116,6 +115,7 @@ module.exports = {
             res.send(user);
         }
         catch(error){
+            console.log(error);
             res.status(500).send('Server side error');
         }
     }
