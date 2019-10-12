@@ -6,8 +6,17 @@ module.exports = {
     getUserById: async function (req, res) {
         try {
             const user = await User.findById(req.params.id);
-            if (!user) return res.status(404).send('A user with the given ID was not found.')
-            res.send(user)
+            if (!user) return res.status(404).send('A user with the given ID was not found.');
+            const tasks = await taskName.find().count();
+            res.send({
+                coins: user.coins,
+                experience: user.experience,
+                _id: user._id,
+                username: user.username,
+                name: user.name,
+                currentTask: user.currentTask,
+                tasksAmount: tasks
+            });
 
         } catch (error) {
 
