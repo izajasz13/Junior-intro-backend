@@ -1,4 +1,4 @@
-const { taskName } = require('../models/taskNames');
+const { TaskName } = require('../models/taskNames');
 const { Task, validateTask } = require('../models/task')
 const { User } = require('../models/user')
 
@@ -43,7 +43,7 @@ module.exports = {
                 answers: data.answers
             });
 
-            const taskName = new taskName({
+            const taskName = new TaskName({
                 numer: data.sectionNumber,
                 title: task.title,
                 taskId: task._id,
