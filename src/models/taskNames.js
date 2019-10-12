@@ -24,4 +24,4 @@ const taskNamesSchema = new Schema({
     }
 });
 
-exports.TaskName = mongoose.model('taskName', taskNamesSchema);
+exports.TaskName = mongoose.model('taskName', taskNamesSchema, 'taskNames');
