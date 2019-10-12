@@ -36,7 +36,8 @@ module.exports = {
 
             const knowledge = new Knowledge({
                 title: req.body.title,
-                description: req.body.description
+                description: req.body.description,
+                content: req.body.content
             });
             const knowledgeList = new KnowledgeList({
                 title: req.body.title,
