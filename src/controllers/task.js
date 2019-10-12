@@ -1,4 +1,5 @@
-const { Task, validateTask } = require('../models/Task')
+const { Task, validateTask } = require('../models/task')
+const { User } = require('../models/user')
 
 module.exports = {
     getTaskById: async (req, res) => {
@@ -18,7 +19,7 @@ module.exports = {
                     content: task.answers.content
                 }
             }
-            res.send(JSON.stringify(obj));
+            res.send(obj);
         }
         catch(error){
             res.status(500).send(error);
@@ -34,12 +35,15 @@ module.exports = {
             const task = new Task({
                 title: data.title,
                 description: data.description,
+                nextTask: null,
                 coins: data.coins,
                 exp: data.exp,
                 questions: data.questions,
                 answers: data.answers
             })
-            await task.save();
+            const taskCreated = await Task.findOne({title: data.title});
+            const id = taskCreated._id;
+            console.log(id);
             res.send("Succesfully added");
         }
         catch(error){
@@ -69,6 +73,35 @@ module.exports = {
         catch(error){
             res.status(500).send('Server side error');
         }
-    }
+    },
 
+    checkAnswers: async (req, res) => {
+        try{
+            const data = req.body;
+            const task = Task.findById(data.id);
+            if(!task) return res.status(404).send('No task with given ID');
+
+            const points = task.answers.map((ele, i) => data.answers[i] === ele ? 1 : 0);  
+            const user = User.findById(data.user);
+            const coins = user.coins + (points.reduce((ele, acc) => acc + ele) * task.coins);
+            const experience = user.experience + task.exp;
+            
+            const userUpdate = await User.findByIdAndUpdate(data.user,
+                {
+                    username: user.username,
+                    name: user.name,
+                    email: user.email,
+                    password: user.password,
+                    currentTask: task.nextTask,
+                    coins,
+                    experience
+                },
+                { new: true});
+            if(!userUpdate) return res.status(404).send('User not found.');
+            res.send(user);
+        }
+        catch(error){
+            res.status(500).send('Server side error');
+        }
+    }
 }
