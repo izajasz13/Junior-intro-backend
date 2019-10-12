@@ -31,7 +31,7 @@ module.exports = {
             const data = req.body;
             const {error} = validateTask(data);
             if(error) return res.status(400).send(error.details[0].message);
-
+            const taskToUpdate = await Task.findOne({nextTask: null});
             const task = new Task({
                 title: data.title,
                 description: data.description,
@@ -41,14 +41,17 @@ module.exports = {
                 questions: data.questions,
                 answers: data.answers
             })
-            await task.save();
-            const taskCreated = await Task.findOne({title: data.title});
-            const id = taskCreated._id;
-            const filter = ({nextTask: null});
-            const taskToUpdate = await Task.findOne({nextTask: null});
-            await Task.updateOne(filter, {nextTask: id})
-            if (!taskToUpdate) return res.status(404).send('Task to update not found');
-
+            const isCreated = await task.save();
+            if(taskToUpdate){
+                const taskCreated = await Task.findOne({title: data.title});
+                const id = taskCreated._id;
+                const filter = ({_id: taskToUpdate._id});
+                await Task.updateOne(filter, {nextTask: id})
+                if (!taskToUpdate) return res.status(404).send('Task to update not found');
+            }
+            else{
+                if (!isCreated) return res.status(404).send('Task to update not found');
+            }
 
             res.send("Succesfully added");
         }
