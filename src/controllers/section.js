@@ -1,5 +1,5 @@
 const { User } = require('../models/user');
-const taskName = require('../models/taskNames').taskName;
+const taskName = require('../models/taskNames').TaskName;
 
 module.exports = {
     getTasksFromSection: async (req, res) => {
