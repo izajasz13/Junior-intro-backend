@@ -1,4 +1,3 @@
-const { TaskName } = require('../models/taskNames');
 const { Task, validateTask } = require('../models/Task')
 
 const { User } = require('../models/user')
@@ -50,15 +49,7 @@ module.exports = {
                 answers: data.answers
             });
 
-            const taskName = new TaskName({
-                number: data.number,
-                title: task.title,
-                taskId: task._id,
-                section: data.section
-            });
-
             await task.save();
-            await taskName.save();
             if(taskToUpdate){
                 const taskCreated = await Task.findOne({title: data.title});
                 const id = taskCreated._id;
